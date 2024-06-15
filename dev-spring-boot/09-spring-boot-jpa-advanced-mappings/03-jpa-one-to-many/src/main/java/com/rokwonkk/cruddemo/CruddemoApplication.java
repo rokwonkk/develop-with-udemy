@@ -1,6 +1,7 @@
 package com.rokwonkk.cruddemo;
 
 import com.rokwonkk.cruddemo.dao.AppDAO;
+import com.rokwonkk.cruddemo.entity.Course;
 import com.rokwonkk.cruddemo.entity.Instructor;
 import com.rokwonkk.cruddemo.entity.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -22,8 +23,43 @@ public class CruddemoApplication {
 //			findInstructor(appDAO);
 //			deleteInstructor(appDAO);
 //			findInstructorDetail(appDAO);
-			deleteInstructorDetail(appDAO);
+//			deleteInstructorDetail(appDAO);
+			createInstructorWithCourses(appDAO);
 		};
+	}
+
+	private void createInstructorWithCourses(AppDAO appDAO) {
+
+		//create the instructor
+		Instructor instructor = new Instructor("tae", "rink", "rokwonkk@ddns.net" );
+
+		//create the instructor detail
+		InstructorDetail instructorDetail = new InstructorDetail(
+				"https://www.youtube.com/taerink",
+				"Game");
+
+		// asscociate the objects
+		instructor.setInstructorDetail(instructorDetail);
+
+		// create some courses
+		Course Course1 = new Course("Game Development");
+		Course Course2 = new Course("Code Development");
+
+		// add courses to instructor
+		instructor.add(Course1);
+		instructor.add(Course2);
+
+		// save the instructor
+		//
+		// Note: this will also save the object
+		// because of CascadeType.RERSIST
+		//
+		System.out.println("Saving instructor: " + instructor);
+		System.out.println("The courses: " + instructor.getCourses());
+
+		appDAO.save(instructor);
+
+		System.out.println("Done!");
 	}
 
 	private void deleteInstructorDetail(AppDAO appDAO) {

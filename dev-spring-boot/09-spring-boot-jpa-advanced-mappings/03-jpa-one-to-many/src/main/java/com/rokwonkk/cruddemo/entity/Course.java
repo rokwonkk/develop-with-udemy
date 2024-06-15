@@ -6,16 +6,6 @@ import jakarta.persistence.*;
 @Table(name="course")
 public class Course {
 
-    //define our fields
-
-    // define constructors
-
-    // define getter setters
-
-    // define toString
-
-    // annotate fields
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
