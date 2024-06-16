@@ -1,7 +1,10 @@
 package com.rokwonkk.cruddemo.dao;
 
+import com.rokwonkk.cruddemo.entity.Course;
 import com.rokwonkk.cruddemo.entity.Instructor;
 import com.rokwonkk.cruddemo.entity.InstructorDetail;
+
+import java.util.List;
 
 public interface AppDAO {
 
@@ -15,4 +18,7 @@ public interface AppDAO {
 
     void deleteInstructorDetailById(int id);
 
+    List<Course> findCoursesByInstructorId(int id);
+
+    Instructor findInstructorByIdJoinFetch(int id);
 }

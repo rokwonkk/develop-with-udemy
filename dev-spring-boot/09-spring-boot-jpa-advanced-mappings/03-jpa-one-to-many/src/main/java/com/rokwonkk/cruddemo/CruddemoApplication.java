@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CruddemoApplication {
 
@@ -24,8 +26,61 @@ public class CruddemoApplication {
 //			deleteInstructor(appDAO);
 //			findInstructorDetail(appDAO);
 //			deleteInstructorDetail(appDAO);
-			createInstructorWithCourses(appDAO);
+//			createInstructorWithCourses(appDAO);
+//			findInstructorWithCourses(appDAO);
+//			findCoursesForInstructor(appDAO);
+			findInstructorWithCoursesJoinFetch(appDAO);
 		};
+	}
+
+	private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
+		int id = 5;
+
+		//find instructor
+		System.out.println("Finding instructor with courses with id: " + id);
+		Instructor instructor = appDAO.findInstructorByIdJoinFetch(id);
+
+		System.out.println("instructor: " + instructor);
+		System.out.println("the associated courses: " + instructor.getCourses());
+
+		System.out.println("Done!");
+	}
+
+	private void findCoursesForInstructor(AppDAO appDAO) {
+		int id = 5;
+
+		//find instructor
+		System.out.println("Finding instructor with courses with id: " + id);
+
+		Instructor instructor = appDAO.findInstructorById(id);
+
+		System.out.println("Found instructor: " + instructor);
+
+		// find courses for instructor
+		System.out.println("Finding courses for instructor id: " + id);
+
+		List<Course> courses = appDAO.findCoursesByInstructorId(id);
+
+		System.out.println("Found courses: " + courses);
+
+		// associate the objects
+		instructor.setCourses(courses);
+
+		System.out.println("the associated courses: " + instructor.getCourses());
+
+		System.out.println("Done!");
+	}
+
+	private void findInstructorWithCourses(AppDAO appDAO) {
+		int id = 5;
+		System.out.println("Finding instructor with courses with id: " + id);
+
+		Instructor instructor = appDAO.findInstructorById(id);
+
+		System.out.println("Found instructor: " + instructor);
+		System.out.println("the associated instructor only: " + instructor.getCourses());
+
+		System.out.println("Done!");
 	}
 
 	private void createInstructorWithCourses(AppDAO appDAO) {
