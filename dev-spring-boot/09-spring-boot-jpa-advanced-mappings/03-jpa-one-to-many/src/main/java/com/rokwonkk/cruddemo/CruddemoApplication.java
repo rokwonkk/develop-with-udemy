@@ -29,8 +29,55 @@ public class CruddemoApplication {
 //			createInstructorWithCourses(appDAO);
 //			findInstructorWithCourses(appDAO);
 //			findCoursesForInstructor(appDAO);
-			findInstructorWithCoursesJoinFetch(appDAO);
+//			findInstructorWithCoursesJoinFetch(appDAO);
+//			updateInstructor(appDAO);
+//			updateCourse(appDAO);
+//			deleteInstructor(appDAO);
+			deleteCourse(appDAO);
 		};
+	}
+
+	private void deleteCourse(AppDAO appDAO) {
+
+		int id = 10;
+		System.out.println("Deleting course id: " + id);
+
+		appDAO.deleteCourseById(id);
+
+		System.out.println("Done!");
+	}
+
+	private void updateCourse(AppDAO appDAO) {
+		int id = 10;
+
+		//find the course
+		System.out.println("Finding course with id: " + id);
+		Course course = appDAO.findCourseById(id);
+
+		//update the course
+		System.out.println("Updating course id: " + id);
+		course.setTitle("Enjoy Coding Simple Things");
+
+		appDAO.update(course);
+
+		System.out.println("Done!");
+	}
+
+	private void updateInstructor(AppDAO appDAO) {
+
+		int id = 5;
+
+		//find the instructor
+		System.out.println("Finding instructor with id: " + id);
+		Instructor instructor = appDAO.findInstructorById(id);
+
+		// update the instructor
+		System.out.println("Updating instructor: id" + id);
+		instructor.setLastName("wonnik");
+
+		appDAO.update(instructor);
+
+		System.out.println("Done!");
 	}
 
 	private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
@@ -142,7 +189,7 @@ public class CruddemoApplication {
 
 	private void deleteInstructor(AppDAO appDAO) {
 
-		int id = 2;
+		int id = 5;
 		System.out.println("Deleting instructor with id: " + id);
 
 		appDAO.deleteInstructorById(id);
