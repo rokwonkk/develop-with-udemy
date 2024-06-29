@@ -23,8 +23,21 @@ public class CruddemoApplication {
 	public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 		return runner -> {
 
+			createCourseAndStudent(appDAO);
 
 		};
+	}
+
+	private void createCourseAndStudent(AppDAO appDAO) {
+
+		// create a course
+
+		// create the students
+
+		// add students to hthe course
+
+		// save the course and associate the students
+
 	}
 
 	private void deleteCourseAndReviews(AppDAO appDAO) {
