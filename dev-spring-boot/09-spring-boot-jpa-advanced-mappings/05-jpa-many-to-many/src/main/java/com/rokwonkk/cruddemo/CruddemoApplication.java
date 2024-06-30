@@ -1,10 +1,7 @@
 package com.rokwonkk.cruddemo;
 
 import com.rokwonkk.cruddemo.dao.AppDAO;
-import com.rokwonkk.cruddemo.entity.Course;
-import com.rokwonkk.cruddemo.entity.Instructor;
-import com.rokwonkk.cruddemo.entity.InstructorDetail;
-import com.rokwonkk.cruddemo.entity.Review;
+import com.rokwonkk.cruddemo.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,21 +20,29 @@ public class CruddemoApplication {
 	public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 		return runner -> {
 
-			createCourseAndStudent(appDAO);
+			createCourseAndStudents(appDAO);
 
 		};
 	}
 
-	private void createCourseAndStudent(AppDAO appDAO) {
+	private void createCourseAndStudents(AppDAO appDAO) {
 
 		// create a course
+		Course course = new Course("Pacman - How To Score One Million Points");
 
 		// create the students
+		Student student1 = new Student("rok", "won", "rokwonkk@co.kr");
+		Student student2 = new Student("su", "yoen", "ssu@co.kr");
 
 		// add students to hthe course
+		course.addStudent(student1);
+		course.addStudent(student2);
 
 		// save the course and associate the students
+		System.out.println("Saving course: " + course);
+		System.out.println("associated students: " + course.getStudents());
 
+		appDAO.save(course);
 	}
 
 	private void deleteCourseAndReviews(AppDAO appDAO) {
